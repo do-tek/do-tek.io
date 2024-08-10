@@ -51,15 +51,15 @@
     }
 
     .links a {
-      color: #681CE1;
+      color: #31446b;
       text-decoration: none;
       margin: 0 15px;
-      text-shadow: 0 0 1px #961EE1;
+      transition: color 0.3s ease;
     }
 
     .links a:hover {
       text-decoration: underline;
-      color: white;
+      color: #00BFFF;
       text-shadow: none;
     }
 
@@ -70,6 +70,27 @@
       width: 100%;
       color: #31446b;
     }
+
+    /* Style for text with blinking cursor */
+    .logo-footer {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #39ff14; /* Text */
+      font-family: 'Courier New', Courier, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #39ff14; /* Caret */
+      box-sizing: border-box;
+    }
+
+    /* Animation for blinking cursor */
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .typing {
+      animation: blink .75s step-end infinite;
+    }
   </style>
 </head>
 <body>
@@ -77,11 +98,35 @@
 <img src="img/do-tek-clear-logo.png" alt="Do-Tek Logo" class="logo">
 <div class="pulsating-text">Do-Tek</div>
 
+<div class="logo-footer">
+  Site is under construction...
+</div>
+
 <div class="links">
-  <a href="mailto:sales@do-tek.kz">sales</a>
-  <a href="https://github.com/do-tek" target="_blank">github</a>
+  <a href="mailto:sales@do-tek.kz">contact us</a>
 </div>
 
 <footer>&copy; 2024 Do-Tek, LLP.</footer>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const textElement = document.querySelector('.logo-footer');
+    const text = textElement.textContent;
+    textElement.textContent = '';
+
+    let index = 0;
+    function type() {
+      if (index < text.length) {
+        textElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 100);
+      } else {
+        textElement.classList.add('typing'); // add blinking cursor
+      }
+    }
+
+    type();
+  });
+</script>
 </body>
 </html>
