@@ -10,8 +10,8 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #121212; /* Тёмный фон */
-      color: #ffffff; /* Белый текст */
+      background-color: #060A13;
+      color: #ffffff;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -22,7 +22,7 @@
 
     .pulsating-text {
       font-size: 4em;
-      color: #9b59b6; /* Фиолетовый цвет */
+      color: #9b59b6;
       animation: pulse 1.5s infinite;
       font-weight: bold;
     }
@@ -39,6 +39,7 @@
       100% {
         transform: scale(1);
         opacity: 1;
+        text-shadow: 0 0 10px #9b59b6;
       }
     }
 
@@ -48,13 +49,16 @@
     }
 
     .links a {
-      color: #a4a4a4; /* Фиолетовые ссылки */
+      color: #681CE1;
       text-decoration: none;
       margin: 0 15px;
+      text-shadow: 0 0 1px #961EE1;
     }
 
     .links a:hover {
       text-decoration: underline;
+      color: white;
+      text-shadow: none;
     }
 
     footer {
@@ -62,17 +66,20 @@
       bottom: 10px;
       text-align: center;
       width: 100%;
+      color: #31446b;
     }
   </style>
 </head>
 <body>
+
+<img src="img/do-tek-clear-logo.png" alt="Do-Tek Logo" class="logo">
 <div class="pulsating-text">Do-Tek</div>
 
 <div class="links">
-  <a href="mailto:sales@do-tek.kz">Sales</a>
-  <a href="https://github.com/do-tek" target="_blank">GitHub</a>
+  <a href="mailto:sales@do-tek.kz">sales</a>
+  <a href="https://github.com/do-tek" target="_blank">github</a>
 </div>
 
-<footer>&copy; 2024 Do-Tek.io</footer>
+<footer>&copy; 2024 Do-Tek, LLP.</footer>
 </body>
 </html>
