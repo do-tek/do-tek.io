@@ -1,735 +1,131 @@
-<!doctype html>
-<html lang="ru" class="">
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Do-Tek DNS — безопасный, быстрый, фильтрующий DNS в Казахстане</title>
-  <meta name="description" content="Блокировка рекламы и фишинга, DoH/DoT, мониторинг и быстрота реакции. Топ по abuse.ch. Подключение за 1 минуту." />
-  <link rel="canonical" href="https://do-tek.io/" />
-  <meta property="og:title" content="Do-Tek DNS — безопасный DNS для Казахстана" />
-  <meta property="og:description" content="Фильтрация рекламы и фишинга, DoH/DoT, мониторинг и SLA." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Do-Tek.io - За технологиями будущее!">
+  <meta name="author" content="Do-Tek LLP">
+  <title>Do-Tek</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #060A13;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
+    .pulsating-text {
+      font-size: 4em;
+      color: #9b59b6;
+      animation: pulse 1.5s infinite;
+      font-weight: bold;
+    }
 
-  <script>
-    (function() {
-      const ls = localStorage.getItem('theme');
-      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const useDark = ls ? (ls === 'dark') : systemDark;
-      if (useDark) {
-        document.documentElement.classList.add('dark');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#0a0a0a');
-      } else {
-        document.documentElement.classList.remove('dark');
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 1px #9b59b6;
       }
-    })();
-  </script>
-  <meta name="theme-color" content="#ffffff" />
+      50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+        text-shadow: 0 0 2px #9b59b6;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+        text-shadow: 0 0 1px #9b59b6;
+      }
+    }
+
+    .links {
+      margin-top: 20px;
+      font-size: 1.2em;
+    }
+
+    .links a {
+      color: #31446b;
+      text-decoration: none;
+      margin: 0 15px;
+      transition: color 0.3s ease;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+      color: #00BFFF;
+      text-shadow: none;
+    }
+
+    footer {
+      position: absolute;
+      bottom: 10px;
+      text-align: center;
+      width: 100%;
+      color: #31446b;
+    }
+
+    /* Style for text with blinking cursor */
+    .logo-footer {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #39ff14; /* Text */
+      font-family: 'Courier New', Courier, monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: .15em solid #39ff14; /* Caret */
+      box-sizing: border-box;
+    }
+
+    /* Animation for blinking cursor */
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
+
+    .typing {
+      animation: blink .75s step-end infinite;
+    }
+  </style>
 </head>
-<body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
-<header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-  <a href="/" class="text-xl font-semibold">Do-Tek</a>
-  <nav class="hidden md:flex gap-6 text-sm">
-    <a href="#solutions" class="hover:underline">Решения</a>
-    <a href="#monitoring" class="hover:underline">Мониторинг</a>
-    <a href="#guides" class="hover:underline">Подключение</a>
-    <a href="#pricing" class="hover:underline">Цены</a>
-    <a href="#contact" class="hover:underline">Контакты</a>
-  </nav>
+<body>
 
-  <!-- Theme toggle icon -->
-  <button id="themeToggle"
-          class="ml-4 p-2 rounded-lg border border-neutral-200 hover:bg-neutral-100
-                 dark:border-neutral-700 dark:hover:bg-neutral-900 transition-colors"
-          aria-label="Переключить тему">
-    <!-- Sun icon -->
-    <svg id="iconSun" xmlns="http://www.w3.org/2000/svg"
-         class="h-5 w-5 text-yellow-500 dark:hidden"
-         viewBox="0 0 20 20" fill="currentColor">
-      <path d="M10 3.5a.75.75 0 01.75.75V6a.75.75 0 01-1.5 0V4.25A.75.75 0 0110 3.5zM10 14a4 4 0 100-8 4 4 0 000 8zm6.5-4a.75.75 0 01.75.75V12a.75.75 0 01-1.5 0v-1.25a.75.75 0 01.75-.75zM4.75 10a.75.75 0 01.75.75V12a.75.75 0 01-1.5 0v-1.25A.75.75 0 014.75 10zM5.78 5.78a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zm7.496 7.496a.75.75 0 011.06 0l.884.884a.75.75 0 11-1.06 1.06l-.884-.884a.75.75 0 010-1.06zM14.72 5.78a.75.75 0 010 1.06l-.884.884a.75.75 0 01-1.06-1.06l.884-.884a.75.75 0 011.06 0zM6.846 13.276a.75.75 0 010 1.06l-.884.884a.75.75 0 01-1.06-1.06l.884-.884a.75.75 0 011.06 0z"/>
-    </svg>
+<img src="img/do-tek-clear-logo.png" alt="Do-Tek Logo" class="logo">
+<div class="pulsating-text">Do-Tek</div>
 
-    <!-- Moon icon (светлее) -->
-    <svg id="iconMoon" xmlns="http://www.w3.org/2000/svg"
-         class="hidden h-5 w-5 text-neutral-600 dark:block dark:text-neutral-300"
-         viewBox="0 0 20 20" fill="currentColor">
-      <path fill-rule="evenodd"
-            d="M17.293 13.293a8 8 0 11-10.586-10.586 7 7 0 0010.586 10.586z"
-            clip-rule="evenodd"/>
-    </svg>
-  </button>
-</header>
+<div class="logo-footer">
+  site is under construction...
+</div>
 
-<main>
-  <section class="max-w-6xl mx-auto px-4 py-16 text-center">
+<div class="links">
+  <a href="mailto:sales@do-tek.kz">contact us</a>
+</div>
 
-    <div class="py-12 text-center">
-      <div class="max-w-lg mx-auto mb-2">
-        <h2 class="text-3xl md:text-4xl mb-4 font-bold font-heading">
-          <span>Расширенная</span>
-          <span class="text-green-600">DNS</span>
-          <span>Защита</span>
-        </h2>
-        <p class="text-blueGray-400 leading-relaxed">
-          Защитита организаций от киберугроз с помощью комплексного решения DNS-безопасности. Блокировка вредоносных доменов и безопасный просмотр веб-страниц.
-        </p>
-      </div>
-    </div>
-
-    <h1 class="text-4xl md:text-6xl font-bold leading-tight">
-      Безопасный DNS для Вас
-    </h1>
-    <p class="mt-4 text-neutral-600 dark:text-neutral-300">
-      Блокируем фишинг и рекламу, поддерживаем DoH/DoT, даём мониторинг и быструю реакцию.
-      Мы в топе abuse.ch.
-    </p>
-
-    <!-- Большой превью-дашборд между заголовком и кнопками -->
-    <figure class="mt-8 relative -mx-4 sm:-mx-6 lg:-mx-8 overflow-hidden rounded-none sm:rounded-2xl border border-neutral-200 dark:border-neutral-800 shadow-2xl">
-      <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent
-              dark:from-black/20"></div>
-
-      <picture>
-        <source
-                type="image/webp"
-                srcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
-                sizes="100vw">
-        <source
-                type="image/jpeg"
-                srcset="/img/secure-dns-dashboard-example.jpg 1x, /img/secure-dns-dashboard-example@2x.jpg 2x"
-                sizes="100vw">
-        <img
-                src="/img/secure-dns-dashboard-example.jpg"
-                alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"
-                loading="lazy"
-                class="block w-full h-auto transition duration-500 ease-out blur-sm scale-[1.01]"
-                onload="this.classList.remove('blur-sm','scale-[1.01]')"
-        />
-      </picture>
-
-      <figcaption class="absolute bottom-0 left-0 right-0 text-xs
-                     bg-white/60 dark:bg-black/50 backdrop-blur px-3 py-2
-                     text-neutral-700 dark:text-neutral-300">
-        Живой мониторинг: задержка, QPS, отказоустойчивость, блокировки по категориям
-      </figcaption>
-    </figure>
-
-
-    <!-- Большой превью-дашборд между заголовком и кнопками -->
-<!--    <figure class="mt-8 relative mx-auto w-full max-w-5xl rounded-2xl overflow-hidden-->
-<!--               border border-neutral-200 dark:border-neutral-800 shadow-2xl">-->
-<!--      <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent-->
-<!--              dark:from-black/20"></div>-->
-
-<!--      <picture>-->
-<!--        <source-->
-<!--                type="image/webp"-->
-<!--                srcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"-->
-<!--                sizes="(min-width:1024px) 960px, 92vw">-->
-<!--        <source-->
-<!--                type="image/jpeg"-->
-<!--                srcset="/img/secure-dns-dashboard-example.jpg 1x, /img/secure-dns-dashboard-example@2x.jpg 2x"-->
-<!--                sizes="(min-width:1024px) 960px, 92vw">-->
-<!--        <img-->
-<!--                src="/img/secure-dns-dashboard-example.jpg"-->
-<!--                alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"-->
-<!--                loading="lazy"-->
-<!--                class="block w-full h-auto transition duration-500 ease-out blur-sm scale-[1.01]"-->
-<!--                onload="this.classList.remove('blur-sm','scale-[1.01]')"-->
-<!--        />-->
-<!--      </picture>-->
-
-<!--      <figcaption class="absolute bottom-0 left-0 right-0 text-xs-->
-<!--                     bg-white/60 dark:bg-black/50 backdrop-blur px-3 py-2-->
-<!--                     text-neutral-700 dark:text-neutral-300">-->
-<!--        Живой мониторинг: задержка, QPS, отказоустойчивость, блокировки по категориям-->
-<!--      </figcaption>-->
-<!--    </figure>-->
-
-    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-      <a href="#guides"
-         class="px-6 py-2.5 md:py-3 rounded-xl text-white font-medium bg-green-600 hover:bg-green-700
-                dark:bg-green-500 dark:text-black dark:hover:bg-green-400">
-        Запросить демо
-      </a>
-      <a href="#contact"
-         class="px-6 py-2.5 md:py-3 rounded-xl border font-medium
-                border-neutral-200 hover:bg-neutral-100
-                dark:border-neutral-700 dark:hover:bg-neutral-600">
-        Запросить пилот
-      </a>
-    </div>
-  </section>
-
-<!--  background-->
-
-<!--  <section class="relative max-w-6xl mx-auto px-4 py-16 text-center overflow-hidden">-->
-<!--    &lt;!&ndash; Фоновый дашборд &ndash;&gt;-->
-<!--    <div class="absolute inset-0 -z-10">-->
-<!--      <img src="/img/secure-dns-dashboard-example.jpg"-->
-<!--           alt=""-->
-<!--           class="w-full h-full object-cover opacity-40 blur-sm md:blur md:opacity-45-->
-<!--                brightness-110 saturate-125" />-->
-<!--      &lt;!&ndash; Лёгкий градиент, чтобы текст читался, но картинка была видна &ndash;&gt;-->
-<!--      <div class="absolute inset-0 bg-gradient-to-b-->
-<!--                from-white/30 via-white/20 to-white/40-->
-<!--                dark:from-neutral-950/50 dark:via-neutral-950/40 dark:to-neutral-950/60">-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    &lt;!&ndash; твой контент hero &ndash;&gt;-->
-<!--    <div class="py-12 text-center">-->
-<!--      <div class="max-w-lg mx-auto mb-2">-->
-<!--        <h2 class="text-3xl md:text-4xl mb-4 font-bold font-heading">-->
-<!--          <span>Расширенная</span>-->
-<!--          <span class="text-green-600">DNS</span>-->
-<!--          <span>Защита</span>-->
-<!--        </h2>-->
-<!--        <p class="text-blueGray-400 leading-relaxed">-->
-<!--          Защитита организаций от киберугроз с помощью комплексного решения DNS-безопасности.-->
-<!--          Блокировка вредоносных доменов и безопасный просмотр веб-страниц.-->
-<!--        </p>-->
-<!--      </div>-->
-<!--    </div>-->
-
-<!--    <h1 class="text-4xl md:text-6xl font-bold leading-tight">Безопасный DNS для Вас</h1>-->
-<!--    <p class="mt-4 text-neutral-600 dark:text-neutral-300">-->
-<!--      Блокируем фишинг и рекламу, поддерживаем DoH/DoT, даём мониторинг и быструю реакцию.-->
-<!--      Мы в топе abuse.ch.-->
-<!--    </p>-->
-
-<!--    <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">-->
-<!--      <a href="#guides"-->
-<!--         class="px-6 py-2.5 md:py-3 rounded-xl text-white font-medium bg-green-600 hover:bg-green-700-->
-<!--              dark:bg-green-500 dark:text-black dark:hover:bg-green-400">Запросить демо</a>-->
-<!--      <a href="#contact"-->
-<!--         class="px-6 py-2.5 md:py-3 rounded-xl border font-medium-->
-<!--              border-neutral-200 hover:bg-neutral-100-->
-<!--              dark:border-neutral-700 dark:hover:bg-neutral-600">Запросить пилот</a>-->
-<!--    </div>-->
-<!--  </section>-->
-
-<!--background end-->
-
-<!--  <section id="solutions" class="max-w-6xl mx-auto px-4 py-12 grid md:grid-cols-3 gap-6">-->
-<!--    <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur-->
-<!--                dark:border-neutral-800 dark:bg-neutral-900/60">-->
-<!--      <h3 class="font-semibold text-lg">Фильтрация и защита</h3>-->
-<!--      <p class="mt-2 text-neutral-600 dark:text-neutral-300">Реклама, трекеры, фишинг, C2 — блокируем на уровне DNS.</p>-->
-<!--    </div>-->
-<!--    <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur-->
-<!--                dark:border-neutral-800 dark:bg-neutral-900/60">-->
-<!--      <h3 class="font-semibold text-lg">Современные протоколы</h3>-->
-<!--      <p class="mt-2 text-neutral-600 dark:text-neutral-300">DoH/DoT, Zero‑Trust режим, rate limiting, ML‑эвристики.</p>-->
-<!--    </div>-->
-<!--    <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur-->
-<!--                dark:border-neutral-800 dark:bg-neutral-900/60">-->
-<!--      <h3 class="font-semibold text-lg">Мониторинг и SLA</h3>-->
-<!--      <p class="mt-2 text-neutral-600 dark:text-neutral-300">Grafana/Prometheus, алерты, время реакции минутами.</p>-->
-<!--    </div>-->
-<!--  </section>-->
-
-  <section id="solutions" class="max-w-6xl mx-auto px-4 py-12">
-    <!-- Заголовок секции -->
-    <div class="mb-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold font-heading">
-        <span class="text-green-600">Фундамент</span> информационной безопасности
-      </h2>
-      <p class="mt-2 text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
-        Базовые и расширенные механизмы защиты DNS, на которых строится киберустойчивость вашей сети.
-      </p>
-    </div>
-
-    <!-- Карточки -->
-    <div class="grid md:grid-cols-3 gap-6">
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">Фильтрация и защита</h3>
-        <p class="mt-2 text-neutral-600 dark:text-neutral-300">
-          Реклама, трекеры, фишинг, C2 — блокируем на уровне DNS.
-        </p>
-      </div>
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">Современные протоколы</h3>
-        <p class="mt-2 text-neutral-600 dark:text-neutral-300">
-          DoH/DoT, Zero-Trust режим, rate limiting, ML-эвристики.
-        </p>
-      </div>
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">Мониторинг и SLA</h3>
-        <p class="mt-2 text-neutral-600 dark:text-neutral-300">
-          Grafana/Prometheus, алерты, время реакции минутами.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <section class="max-w-6xl mx-auto px-4 py-12">
-    <!-- Заголовок секции -->
-    <div class="mb-8">
-    <span class="inline-block text-xs py-1 px-3 text-green-700 bg-green-100 rounded-xl
-                 dark:text-green-300 dark:bg-green-900/30">
-      Функции безопасности
-    </span>
-      <h2 class="text-3xl md:text-4xl mt-3 font-bold">
-        Безопасность и Скорость
-      </h2>
-      <p class="mt-2 text-neutral-600 dark:text-neutral-300">
-        Быстрая фильтрация, высокая производительность и прозрачная наблюдаемость.
-      </p>
-    </div>
-
-    <!-- Плитки -->
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      <!-- Блокировка Malware -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300">
-            <!-- check -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M9 12l2 2 4-4M5 13a7 7 0 1014 0 7 7 0 00-14 0z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">Блокировка Malware</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              Фишинг, C2/C2C, malvertising: блэклисты + эвристики до попадания в сеть.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Молниеносный ответ -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">
-            <!-- bolt -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">Молниеносный ответ</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              Оптимизированный резолвинг, DoH/DoT, гео‑маршрутизация. Низкая задержка под нагрузкой.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Real‑time журналирование -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300">
-            <!-- logs -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M4 7h16M4 12h16M4 17h16"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">Real‑time журналирование</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              Syslog/SIEM/QRadar совместимость, Prometheus метрики, дашборды Grafana, собственная панель Do-Vision.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Детект DNS‑туннелей -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
-            <!-- shield -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 6l7 3v5c0 5-3.5 9-7 9s-7-4-7-9V9l7-3z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">Детект DNS‑туннелей</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              Энтропия, Base64/32/hex‑паттерны, поведенческие признаки, авто‑реакции по правилам.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Совместимость и доступ -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-rose-100 text-rose-700 dark:bg-rose-900/40 dark:text-rose-300">
-            <!-- users -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 11c1.657 0 3-1.567 3-3.5S13.657 4 12 4 9 5.567 9 7.5 10.343 11 12 11zM19 20a7 7 0 10-14 0h14z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">LDAP Совместимость</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              Работает в изолированных сетях, поддержка LDAP/AD, гибкие правила маршрутизации DNS запросов.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- API и автоматизация -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <div class="flex items-start gap-3">
-          <div class="mt-1 w-8 h-8 rounded-full flex items-center justify-center
-                    bg-teal-100 text-teal-700 dark:bg-teal-900/40 dark:text-teal-300">
-            <!-- api -->
-            <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 7h6v6H3V7zm12 0h6v6h-6V7zM9 17h6v4H9v-4z"/>
-            </svg>
-          </div>
-          <div>
-            <h3 class="font-semibold text-lg">Панель Do-Vision</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-              RBAC, графики, управление списками, триггеры на события, уведомления в Telegram/Teams/Slack/Email.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Для бизнеса -->
-  <section id="business" class="max-w-6xl mx-auto px-4 py-12">
-    <div class="rounded-2xl border border-neutral-200 dark:border-neutral-800 overflow-hidden">
-      <!-- Header -->
-      <div class="p-8 bg-neutral-50 dark:bg-neutral-900/40">
-        <h2 class="text-3xl font-bold">Для бизнеса</h2>
-        <p class="mt-2 text-neutral-700 dark:text-neutral-300 max-w-3xl">
-          Превентивный DNS, гибкая кастомизация под требования, совместимость с корпоративной безопасностью и аудитом.
-        </p>
-        <div class="mt-4 flex flex-wrap gap-2 text-xs">
-          <span class="px-2.5 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-200">Uptime 99.9%+</span>
-          <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">World-Wide Доступность</span>
-<!--          <span class="px-2.5 py-1 rounded-full bg-neutral-200 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">GDPR‑friendly</span>-->
-          <span class="px-2.5 py-1 rounded-full bg-neutral-200 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">KZ‑хостинг</span>
-
-        </div>
-      </div>
-
-      <!-- Features grid -->
-      <div class="p-8 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Превентивный DNS -->
-        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">
-          <div class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-green-600 dark:text-green-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 6l7 3v5c0 5-3.5 9-7 9s-7-4-7-9V9l7-3z"/>
-            </svg>
-            <div>
-              <h3 class="font-semibold">Превентивный DNS</h3>
-              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                Блокировка фишинга, C2/C2C, malvertising.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Кастомизация под заказчика -->
-        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">
-          <div class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-blue-600 dark:text-blue-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 6v12m6-6H6"/>
-            </svg>
-            <div>
-              <h3 class="font-semibold">Кастомизация и доработка</h3>
-              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                Персональные политики, интеграции, приватные резолверы и IP адреса.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Детект DNS-туннелей -->
-        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">
-          <div class="flex items-start gap-3">
-            <svg class="w-6 h-6 text-amber-600 dark:text-amber-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M13 10V3L4 14h7v7l9-11h-7z"/>
-            </svg>
-            <div>
-              <h3 class="font-semibold">Все под ключ</h3>
-              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-                Внедрение, обучение, и сопровождение на всех этапах.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Логи и совместимость -->
-<!--        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">-->
-<!--          -->
-<!--          <div class="flex items-start gap-3">-->
-<!--            <svg class="w-6 h-6 text-purple-600 dark:text-purple-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">-->
-<!--              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                    d="M4 7h16M4 12h16M4 17h16"/>-->
-<!--            </svg>-->
-<!--            <div>-->
-<!--              <h3 class="font-semibold">Журналы и SIEM</h3>-->
-<!--              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">-->
-<!--                Совместимо с Syslog, SIEM, QRadar, Splunk. Экспорт в Prometheus, дашборды Grafana, web‑хуки.-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          -->
-<!--        </div>-->
-
-        <!-- Доступ и контроль -->
-<!--        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">-->
-<!--          -->
-<!--          <div class="flex items-start gap-3">-->
-<!--            <svg class="w-6 h-6 text-rose-600 dark:text-rose-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">-->
-<!--              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                    d="M12 11c1.657 0 3-1.567 3-3.5S13.657 4 12 4 9 5.567 9 7.5 10.343 11 12 11zM19 20a7 7 0 10-14 0h14z"/>-->
-<!--            </svg>-->
-<!--            <div>-->
-<!--              <h3 class="font-semibold">Доступ и соответствие</h3>-->
-<!--              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">-->
-<!--                SSO/SAML, RBAC, белые/чёрные списки по IP/ASN/странам, аудит‑трейл, отчёты для комплаенса.-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          -->
-<!--        </div>-->
-
-        <!-- API и автоматизация -->
-<!--        <div class="p-6 rounded-xl border border-neutral-200 dark:border-neutral-800">-->
-<!--          -->
-<!--          <div class="flex items-start gap-3">-->
-<!--            <svg class="w-6 h-6 text-teal-600 dark:text-teal-400" viewBox="0 0 24 24" fill="none" stroke="currentColor">-->
-<!--              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"-->
-<!--                    d="M3 7h6v6H3V7zm12 0h6v6h-6V7zM9 17h6v4H9v-4z"/>-->
-<!--            </svg>-->
-<!--            <div>-->
-<!--              <h3 class="font-semibold">API и автоматизация</h3>-->
-<!--              <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">-->
-<!--                REST API/CLI, интеграции с ITSM, алерты в Telegram/Slack/Email, MSSP мульти‑тенант режим.-->
-<!--              </p>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          -->
-<!--        </div>-->
-
-      </div>
-
-      <!-- Add‑ons / плюшки -->
-      <div class="px-8 pb-8">
-        <h4 class="text-sm font-semibold uppercase tracking-wide text-neutral-500 dark:text-neutral-400">Опциональные плюсы</h4>
-        <ul class="mt-3 grid md:grid-cols-2 lg:grid-cols-3 gap-2 text-sm text-neutral-700 dark:text-neutral-300">
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> Выделенные DoH/DoT‑ендпоинты под ваш домен
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> Частные списки блокировок/исключений, pool-резольверов
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> Помощь в аналитике и реагировании на инциденты
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> On‑prem / hybrid развёртывание
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> Расширенная ретенция логов
-          </li>
-          <li class="flex items-center gap-2">
-            <span class="inline-block w-1.5 h-1.5 rounded-full bg-green-600"></span> Профессиональная поддержка
-          </li>
-        </ul>
-
-        <div class="mt-6 flex flex-col sm:flex-row gap-4 justify-center">
-          <a href="#contact"
-             class="inline-block px-6 py-2.5 md:py-3 rounded-xl border font-medium
-                  border-neutral-200 hover:bg-neutral-100
-                  dark:border-neutral-700 dark:hover:bg-neutral-900">
-            Запросить коммерческое предложение
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <section id="guides" class="max-w-6xl mx-auto px-4 py-12">
-    <div class="rounded-2xl p-8 bg-green-50 border border-green-200 dark:bg-green-900/20 dark:border-green-800">
-      <div class="flex flex-col items-center justify-center text-center">
-        <h2 class="text-3xl font-bold flex items-center gap-3 text-green-700 dark:text-green-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none"
-               viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 6l7 3v5c0 5-3.5 9-7 9s-7-4-7-9V9l7-3z" />
-          </svg>
-          Безопасный детский интернет
-        </h2>
-        <p class="mt-3 text-neutral-700 dark:text-neutral-300 max-w-2xl">
-          Do-Tek KIDS DNS защищает детей от нежелательного контента: блокировка взрослого контента,
-          фишинга и вредоносных сайтов. Подходит для школ, детских учреждений.
-        </p>
-        <div class="mt-6">
-          <a href="#contact"
-             class="inline-block px-6 py-3 rounded-xl bg-green-600 text-white font-medium
-                hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-400 dark:text-black">
-            Запросить подключение
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-<!--  <section id="pricing" class="max-w-6xl mx-auto px-4 py-12">-->
-<!--    <h2 class="text-2xl font-semibold">Тарифы</h2>-->
-<!--    <p class="mt-2 text-neutral-700 dark:text-neutral-300">SMB, Enterprise. Гибкое ценообразование. Скидки для образования.</p>-->
-<!--  </section>-->
-
-  <section id="pricing" class="max-w-6xl mx-auto px-4 py-12">
-    <!-- Заголовок -->
-    <div class="mb-8 text-center">
-      <h2 class="text-3xl md:text-4xl font-bold font-heading">Тарифы</h2>
-      <p class="mt-2 text-neutral-600 dark:text-neutral-300 max-w-2xl mx-auto">
-        SMB, Enterprise и государственный сектор. Индивидуальные условия под вашу инфраструктуру и бюджет.
-      </p>
-      <div class="mt-4 flex flex-wrap justify-center gap-2 text-xs">
-        <span class="px-2.5 py-1 rounded-full bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-200">Гибкие скидки</span>
-        <span class="px-2.5 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-200">Скидки для образования/НКО</span>
-        <span class="px-2.5 py-1 rounded-full bg-neutral-200 text-neutral-800 dark:bg-neutral-800 dark:text-neutral-200">Индивидуальный подход</span>
-<!--        <span class="px-2.5 py-1 rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-200">SLA 99.9%+</span>-->
-      </div>
-    </div>
-
-    <!-- Карточки (без фикс. цен) -->
-    <div class="grid md:grid-cols-3 gap-6">
-      <!-- Базовый кейс -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">SMB / Офисы</h3>
-        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-          Чистый интернет и защита от фишинга/малвари для команд и филиалов.
-        </p>
-<!--        <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">-->
-<!--          <li>• Фильтрация рекламы и трекеров</li>-->
-<!--          <li>• DoH/DoT, приватные политики</li>-->
-<!--          <li>• Дашборды, алерты</li>-->
-<!--        </ul>-->
-      </div>
-
-      <!-- Корпоративный -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">Enterprise</h3>
-        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-          Персональные политики, интеграции и расширенная грануляция настроек.
-        </p>
-<!--        <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">-->
-<!--          <li>• Аудит‑трейл</li>-->
-<!--          <li>• Интеграция с SIEM</li>-->
-<!--          <li>• Выделенные ендпоинты/адреса</li>-->
-<!--        </ul>-->
-      </div>
-
-      <!-- MSSP/Партнёры -->
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h3 class="font-semibold text-lg">Партнёры / MSSP</h3>
-        <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-300">
-          Мы открыты к партнерству. Просто свяжитесь с нами.
-        </p>
-<!--        <ul class="mt-4 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">-->
-<!--          <li>• REST API/CLI, web‑хуки</li>-->
-<!--          <li>• Персональные брендинги/домены</li>-->
-<!--          <li>• Отчётность и биллинг</li>-->
-<!--        </ul>-->
-      </div>
-    </div>
-
-    <!-- Тезисы про ценообразование -->
-    <div class="mt-8 grid md:grid-cols-2 gap-6">
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h4 class="font-semibold">Как формируется стоимость</h4>
-        <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-          <li>• Количество пользователей/узлов, объём DNS‑трафика</li>
-          <li>• Требования к SLA и зонам отказоустойчивости</li>
-          <li>• Интеграции (SIEM/ITSM), кастомные политики и отчёты</li>
-          <li>• On‑prem/hybrid размещение и ретенция логов</li>
-        </ul>
-      </div>
-      <div class="p-6 rounded-2xl border border-neutral-200 bg-white/70 backdrop-blur
-                dark:border-neutral-800 dark:bg-neutral-900/60">
-        <h4 class="font-semibold">Скидки и условия</h4>
-        <ul class="mt-3 space-y-2 text-sm text-neutral-700 dark:text-neutral-300">
-          <li>• Образование, НКО, стартапы — специальные условия</li>
-          <li>• Годовая предоплата и объём — дополнительная скидка</li>
-          <li>• Пилот/POC — быстрый запуск и перенос на прод</li>
-          <li>• Партнёрская программа для интеграторов/MSSP</li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Контакты / CTA -->
-    <div class="mt-8 text-center">
-      <p class="text-sm text-neutral-600 dark:text-neutral-300">
-        Напишите нам — подберём конфигурацию и условия под вашу задачу:
-        <a href="mailto:sales@do-tek.kz" class="underline decoration-dotted hover:opacity-80">sales@do-tek.kz</a>
-      </p>
-
-<!--      <div class="mt-4 flex flex-col sm:flex-row gap-4 justify-center">-->
-<!--        <a href="#contact"-->
-<!--           class="px-6 py-2.5 md:py-3 rounded-xl text-white font-medium bg-green-600 hover:bg-green-700-->
-<!--                dark:bg-green-500 dark:text-black dark:hover:bg-green-400">-->
-<!--          Запросить коммерческое предложение-->
-<!--        </a>-->
-<!--        <a href="#contact"-->
-<!--           class="px-6 py-2.5 md:py-3 rounded-xl border font-medium-->
-<!--                border-neutral-200 hover:bg-neutral-100-->
-<!--                dark:border-neutral-700 dark:hover:bg-neutral-600">-->
-<!--          Обсудить пилот / POC-->
-<!--        </a>-->
-<!--      </div>-->
-    </div>
-  </section>
-
-
-</main>
-
-<footer id="contact" class="text-center max-w-6xl mx-auto px-4 py-12 text-neutral-600 dark:text-neutral-400">
-  <div>© Do-Tek LLC, DoNS - Ваш Безопасный DNS. Казахстан, г.Алматы.</div>
-</footer>
+<footer>&copy; 2024 Do-Tek, LLP.</footer>
 
 <script>
-  const btn = document.getElementById('themeToggle');
-  btn?.addEventListener('click', () => {
-    const root = document.documentElement;
-    const isDark = root.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', isDark ? '#0a0a0a' : '#ffffff');
+  document.addEventListener('DOMContentLoaded', function() {
+    const textElement = document.querySelector('.logo-footer');
+    const text = textElement.textContent;
+    textElement.textContent = '';
+
+    let index = 0;
+    function type() {
+      if (index < text.length) {
+        textElement.textContent += text.charAt(index);
+        index++;
+        setTimeout(type, 100);
+      } else {
+        textElement.classList.add('typing'); // add blinking cursor
+      }
+    }
+
+    type();
   });
 </script>
 </body>
