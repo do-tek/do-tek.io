@@ -1,6 +1,7 @@
 {
   "name": "Do-Tek DNS",
   "short_name": "Do-Tek",
+  "lang": "ru",
   "description": "Безопасный DNS и решения по кибербезопасности для бизнеса и частных пользователей.",
   "start_url": "/",
   "display": "standalone",
@@ -8,9 +9,9 @@
   "theme_color": "#6c2bd9",
   "icons": [
     {
-        "src": "/favicon.ico",
-        "sizes": "48x48",
-        "type": "image/x-icon"
+      "src": "/favicon.ico",
+      "sizes": "48x48",
+      "type": "image/x-icon"
     },
     {
       "src": "/icons/icon-48x48.png",
