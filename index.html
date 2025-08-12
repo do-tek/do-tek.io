@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="ru" class="">
 <head>
-  <meta charset="utf-8" />
+    <meta charset="utf-8" />
 <!--  <meta name="viewport" content="width=device-width,initial-scale=1" />-->
 
     <!-- SEO -->
@@ -47,14 +47,13 @@
     <link rel="preload" href="/css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/css/base.css"></noscript>
 
-  <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+      </script>
 
     <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
-
-  <script>
-    (function() {
+        (function() {
       const ls = localStorage.getItem('theme');
       const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
       const useDark = ls ? (ls === 'dark') : systemDark;
@@ -66,8 +65,9 @@
         document.querySelector('meta[name="theme-color"]')?.setAttribute('content', '#ffffff');
       }
     })();
-  </script>
-  <meta name="theme-color" content="#ffffff" />
+    </script>
+    <meta name="theme-color" content="#ffffff" />
+
 </head>
 <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
 <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
@@ -104,6 +104,8 @@
 </header>
 
 <main>
+
+<!--    Hero-->
   <section class="max-w-6xl mx-auto px-4 py-16 text-center">
 
     <div class="py-12 text-center">
@@ -145,6 +147,7 @@
                 src="/img/secure-dns-dashboard-example.jpg"
                 alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"
                 loading="lazy"
+                decoding="async"
                 class="block w-full h-auto transition duration-500 ease-out blur-sm scale-[1.01]"
                 onload="this.classList.remove('blur-sm','scale-[1.01]')"
         />
