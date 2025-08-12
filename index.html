@@ -68,6 +68,12 @@
     </script>
     <meta name="theme-color" content="#ffffff" />
 
+<!--    Hero img-->
+    <link rel="preload" as="image"
+          imagesrcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
+          imagesizes="100vw"
+          href="/img/secure-dns-dashboard-example.webp">
+
 </head>
 <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
 <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
@@ -134,26 +140,29 @@
       <div class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent
               dark:from-black/20"></div>
 
-      <picture>
-        <source
-                type="image/webp"
-                srcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
-                sizes="100vw">
-        <source
-                type="image/jpeg"
-                srcset="/img/secure-dns-dashboard-example.jpg 1x, /img/secure-dns-dashboard-example@2x.jpg 2x"
-                sizes="100vw">
-        <img
-                src="/img/secure-dns-dashboard-example.jpg"
-                alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"
-                loading="lazy"
-                decoding="async"
-                class="block w-full h-auto transition duration-500 ease-out blur-sm scale-[1.01]"
-                onload="this.classList.remove('blur-sm','scale-[1.01]')"
-        />
-      </picture>
+        <picture>
+            <source
+                    type="image/webp"
+                    srcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
+                    sizes="100vw">
+            <source
+                    type="image/jpeg"
+                    srcset="/img/secure-dns-dashboard-example.jpg 1x, /img/secure-dns-dashboard-example@2x.jpg 2x"
+                    sizes="100vw">
+<!--            with real size - width="1280" height="507" -->
+            <img
+                    src="/img/secure-dns-dashboard-example.jpg"
+                    alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="async"
+                    width="1280" height="507"
+            class="block w-full h-auto opacity-0 transition-opacity duration-300" onload="this.classList.remove('opacity-0')"
+            />
+        </picture>
 
-      <figcaption class="absolute bottom-0 left-0 right-0 text-xs
+
+        <figcaption class="absolute bottom-0 left-0 right-0 text-xs
                      bg-white/60 dark:bg-black/50 backdrop-blur px-3 py-2
                      text-neutral-700 dark:text-neutral-300">
         Живой мониторинг: задержка, QPS, отказоустойчивость, блокировки по категориям
