@@ -1,21 +1,11 @@
-self.addEventListener('install', event => {
-    event.waitUntil(
-        caches.open('do-tek-cache-v1').then(cache => {
-            return cache.addAll([
-                '/',
-                '/index.html',
-                '/favicon.ico',
-                '/icons/icon-192x192.png',
-                '/icons/icon-512x512.png'
-            ]);
-        })
-    );
-});
-
-self.addEventListener('fetch', event => {
-    event.respondWith(
-        caches.match(event.request).then(response => {
-            return response || fetch(event.request);
-        })
-    );
+// Self-destructing legacy service worker.
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.map(key => caches.delete(key)));
+    await self.registration.unregister();
+    const clients = await self.clients.matchAll({type: 'window'});
+    for (const client of clients) client.navigate(client.url);
+  })());
 });
