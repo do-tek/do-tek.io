@@ -5,134 +5,216 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#1f2433">
-  <title>Do-Tek DNS — превентивная DNS-защита</title>
-  <meta name="description" content="Do-Tek DNS защищает организации от фишинга, вредоносных доменов, C2-инфраструктуры и DNS-туннелей. Мониторинг, DoH/DoT, SIEM и корпоративное внедрение.">
-  <meta name="robots" content="index,follow">
-  <meta property="og:title" content="Do-Tek DNS — превентивная DNS-защита">
-  <meta property="og:description" content="Защита DNS, мониторинг, DoH/DoT, SIEM и корпоративное внедрение.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://do-tek.io/">
-  <meta property="og:image" content="https://do-tek.io/assets/dashboard.jpg">
-  <link rel="canonical" href="https://do-tek.io/">
+
+  <title>Страница не найдена — Do-Tek DNS</title>
+  <meta name="robots" content="noindex,follow">
+
   <link rel="icon" href="./favicon.ico" sizes="any">
   <link rel="icon" type="image/png" href="./favicon.png">
   <link rel="stylesheet" href="./assets/site.css">
-  <script>
-    // Одноразовая зачистка старого PWA. Ошибки намеренно игнорируются.
-    (() => {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.getRegistrations().then(items =>
-          Promise.all(items.map(item => item.unregister()))
-        ).catch(() => {});
+
+  <style>
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      min-height: 100vh;
+      min-height: 100svh;
+      margin: 0;
+    }
+
+    .error-page {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+
+      display: grid;
+      place-items: center;
+
+      padding:
+        max(28px, env(safe-area-inset-top))
+        20px
+        max(28px, env(safe-area-inset-bottom));
+
+      text-align: center;
+    }
+
+    .error-logo {
+      position: absolute;
+      top: max(24px, env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%);
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .error-logo img {
+      display: block;
+      width: 112px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .error-content {
+      width: min(680px, 100%);
+      margin: auto;
+    }
+
+    .error-eyebrow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 22px;
+
+      color: #c9ced9;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+    }
+
+    .error-code {
+      margin: 0;
+
+      color: var(--purple);
+      font-size: clamp(7rem, 24vw, 13rem);
+      font-weight: 850;
+      line-height: 0.8;
+      letter-spacing: -0.06em;
+
+      text-shadow: 0 18px 60px rgba(177, 25, 200, 0.24);
+    }
+
+    .error-content h1 {
+      margin: 30px 0 14px;
+
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+    }
+
+    .error-content p {
+      max-width: 520px;
+      margin: 0 auto 30px;
+
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .error-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .error-footer {
+      position: absolute;
+      right: 20px;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      left: 20px;
+
+      color: var(--muted);
+      font-size: 0.78rem;
+      text-align: center;
+    }
+
+    .button-whatsapp {
+      background: linear-gradient(135deg, #25d366, #128c4a);
+      border-color: rgba(37, 211, 102, 0.45);
+      box-shadow: 0 12px 32px rgba(37, 211, 102, 0.18);
+    }
+
+    .button-whatsapp:hover {
+      filter: brightness(1.1);
+      box-shadow: 0 14px 38px rgba(37, 211, 102, 0.26);
+    }
+
+    @media (max-width: 580px) {
+      .error-logo {
+        top: max(18px, env(safe-area-inset-top));
       }
-      if ('caches' in window) {
-        caches.keys().then(keys => Promise.all(keys.map(key => caches.delete(key)))).catch(() => {});
+
+      .error-content {
+        padding-top: 44px;
+        padding-bottom: 44px;
       }
-    })();
-  </script>
+
+      .error-code {
+        font-size: clamp(7rem, 38vw, 10rem);
+      }
+
+      .error-actions {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .error-actions .button {
+        width: 100%;
+      }
+
+      .error-footer {
+        font-size: 0.72rem;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <a class="skip-link" href="#content">Перейти к содержимому</a>
+  <main class="error-page">
+    <a class="error-logo" href="./" aria-label="Do-Tek — главная">
+      <img
+        src="./assets/logo.png"
+        width="112"
+        height="44"
+        alt="Do-Tek"
+      >
+    </a>
 
-  <header class="topbar">
-    <div class="container nav-wrap">
-      <a class="brand" href="./" aria-label="Do-Tek — главная">
-        <img src="./assets/logo.png" width="112" height="44" alt="Do-Tek">
-      </a>
-      <nav class="nav" aria-label="Основная навигация">
-        <a href="#platform">Платформа</a>
-        <a href="#monitoring">Мониторинг</a>
-        <a href="#business">Для бизнеса</a>
-        <a href="#contact">Контакты</a>
-      </nav>
-      <a class="button button-small" href="mailto:sales@do-tek.kz?cc=ak@do-tek.kz&cc=ev@do-tek.kz&subject=Запрос%20пилота%20Do-Tek%20DNS">Запросить пилот</a>
+    <section class="error-content" aria-labelledby="error-title">
+      <div class="error-eyebrow">
+        <span class="status-dot"></span>
+        PAGE NOT FOUND
+      </div>
+
+      <div class="error-code" aria-hidden="true">404</div>
+
+      <h1 id="error-title">Страница не найдена</h1>
+
+      <p>
+        Такой страницы нет, её адрес изменился или в ссылке допущена ошибка.
+      </p>
+
+      <div class="error-actions">
+        <a class="button" href="./">
+          Вернуться на главную
+        </a>
+
+        <a
+          class="button button-whatsapp"
+          href="https://api.whatsapp.com/send?phone=77015274962"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Связаться в WhatsApp
+        </a>
+      </div>
+    </section>
+
+    <div class="error-footer">
+      © <span id="year"></span> Do-Tek DNS
     </div>
-  </header>
-
-  <main id="content">
-    <section class="hero">
-      <div class="container hero-grid">
-        <div class="hero-copy">
-          <div class="eyebrow"><span class="status-dot"></span> DNS SECURITY PLATFORM</div>
-          <h1>Безопасность DNS.<br><span>Видимая в реальном времени.</span></h1>
-          <p class="lead">Do-Tek блокирует фишинг, вредоносные домены, C2-инфраструктуру и DNS-туннели до того, как угроза попадёт в сеть.</p>
-          <div class="hero-actions">
-            <a class="button" href="mailto:sales@do-tek.kz?cc=ak@do-tek.kz&cc=ev@do-tek.kz&subject=Запрос%20пилота%20Do-Tek%20DNS">Запросить пилот</a>
-            <a class="button button-ghost" target="_blank" rel="noopener noreferrer" href="https://api.whatsapp.com/send?phone=77015274962">Связаться в WhatsApp</a>
-          </div>
-          <ul class="quick-facts" aria-label="Ключевые возможности">
-            <li><strong>DNS / DoH / DoT</strong><span>единая точка защиты</span></li>
-            <li><strong>24×7</strong><span>наблюдаемость и алерты</span></li>
-            <li><strong>On-premise</strong><span>или облачное размещение</span></li>
-          </ul>
-        </div>
-
-        <div class="dashboard-shell" id="monitoring">
-          <div class="window-bar">
-            <div class="window-title"><span class="mini-logo">◇</span> Do-Tek Monitoring</div>
-            <div class="window-status"><span class="status-dot"></span> LIVE</div>
-          </div>
-          <img src="./assets/dashboard.jpg" width="1786" height="864" fetchpriority="high" alt="Панель мониторинга Do-Tek DNS с количеством запросов, блокировок, кэш-хитов и графиками нагрузки">
-        </div>
-      </div>
-    </section>
-
-    <section class="metrics-strip" aria-label="Преимущества">
-      <div class="container metrics-grid">
-        <div><span>01</span><strong>Превентивная защита</strong><p>Блокировка до установления соединения с опасным ресурсом.</p></div>
-        <div><span>02</span><strong>Полная наблюдаемость</strong><p>Метрики, журналы, Grafana, Prometheus и интеграции с SIEM.</p></div>
-        <div><span>03</span><strong>Корпоративная интеграция</strong><p>LDAP/AD, индивидуальные политики и изолированные сети.</p></div>
-      </div>
-    </section>
-
-    <section class="section" id="platform">
-      <div class="container">
-        <div class="section-heading">
-          <div class="eyebrow">PLATFORM</div>
-          <h2>Защита без слепых зон</h2>
-          <p>Производительный DNS-контур с фильтрацией, аналитикой и управляемыми политиками.</p>
-        </div>
-        <div class="cards">
-          <article class="card"><div class="card-icon">01</div><h3>Malware и phishing</h3><p>Блэклисты, репутационные источники и эвристический анализ блокируют вредоносную инфраструктуру.</p></article>
-          <article class="card"><div class="card-icon">02</div><h3>DNS-туннели и DGA</h3><p>Энтропия, Base32/64, hex-паттерны и поведенческие признаки выявляют скрытые каналы и генераторы доменов.</p></article>
-          <article class="card"><div class="card-icon">03</div><h3>Высокая производительность</h3><p>Оптимизированный резолвинг, кэширование, геомаршрутизация и отказоустойчивая архитектура.</p></article>
-          <article class="card"><div class="card-icon">04</div><h3>Real-time мониторинг</h3><p>QPS, задержка, блокировки, категории, топы доменов и состояние узлов доступны в одной панели.</p></article>
-          <article class="card"><div class="card-icon">05</div><h3>SIEM и автоматизация</h3><p>Syslog, QRadar, Prometheus, Telegram, Teams, Slack и Email для оперативной реакции.</p></article>
-          <article class="card"><div class="card-icon">06</div><h3>LDAP и Active Directory</h3><p>Персональные политики, группы пользователей, внутренние зоны и работа в изолированном контуре.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section business" id="business">
-      <div class="container business-grid">
-        <div>
-          <div class="eyebrow">ENTERPRISE</div>
-          <h2>Встраивается в существующую инфраструктуру</h2>
-          <p>Do-Tek дополняет текущий стек безопасности, не требуя перестройки всей сети. Возможны пилот, on-premise-развёртывание и адаптация под требования заказчика.</p>
-        </div>
-        <div class="terminal-card" aria-label="Схема интеграции">
-          <div><span>01</span> Клиенты / AD / VPN</div>
-          <div><span>02</span> Do-Tek DNS policy layer</div>
-          <div><span>03</span> Resolver / upstream / internal zones</div>
-          <div><span>04</span> SIEM / Grafana / alerts</div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section cta" id="contact">
-      <div class="container cta-box">
-        <div><div class="eyebrow">PILOT</div><h2>Проверьте Do-Tek на своей инфраструктуре</h2><p>Подготовим план пилота, развернём решение и покажем результат на вашем DNS-трафике.</p></div>
-        <div class="cta-actions"><a class="button" href="mailto:sales@do-tek.kz?cc=ak@do-tek.kz&cc=ev@do-tek.kz&subject=Запрос%20пилота%20Do-Tek%20DNS">sales@do-tek.kz</a><a class="text-link" href="https://openbld.net" target="_blank" rel="noopener noreferrer">Технологическая база OpenBLD →</a></div>
-      </div>
-    </section>
   </main>
 
-  <footer>
-    <div class="container footer-grid">
-      <div>© <span id="year">2026</span> Do-Tek DNS</div>
-      <div>Превентивная DNS-защита для бизнеса</div>
-    </div>
-  </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent =
+      '2024-' + new Date().getFullYear();
+  </script>
 </body>
 </html>
