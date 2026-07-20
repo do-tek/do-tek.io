@@ -11,15 +11,15 @@
 
     <!-- Favicon -->
 <!--    <link rel="icon" href="favicon.ico">-->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png">
-    <link rel="icon" type="image/png" sizes="512x512" href="/favicon.png">
+    <link rel="icon" type="image/x-icon" href="./favicon.ico">
+    <link rel="icon" type="image/png" sizes="192x192" href="./favicon.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="./favicon.png">
 
     <!-- Apple Touch Icon -->
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon.png">
 
     <!-- PWA Manifest -->
-    <!-- <link rel="manifest" href="/site.webmanifest"> -->
+    <!-- <link rel="manifest" href="./site.webmanifest"> -->
 
     <!-- Open Graph -->
     <meta property="og:title" content="Do-Tek DNS — Безопасный DNS для бизнеса и дома">
@@ -43,10 +43,10 @@
 
 
     <!-- add css for tooltip from css/base.css -->
-    <!--    <link rel="stylesheet" href="/css/base.css" />-->
+    <!--    <link rel="stylesheet" href="./css/base.css" />-->
 <!--    preload variant for better performance-->
-<!--    <link rel="preload" href="/css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">-->
-<!--    <noscript><link rel="stylesheet" href="/css/base.css"></noscript>-->
+<!--    <link rel="preload" href="./css/base.css" as="style" onload="this.onload=null;this.rel='stylesheet'">-->
+<!--    <noscript><link rel="stylesheet" href="./css/base.css"></noscript>-->
 
 <!--   or inline-->
     <style>
@@ -98,17 +98,18 @@
             transition: opacity 0.3s ease;
             font-size: 0.85rem;
 
-            /* стрелочка */
-            &::after {
-                content: "";
-                position: absolute;
-                top: 100%;
-                left: 50%;
-                margin-left: -5px;
-                border-width: 5px;
-                border-style: solid;
-                border-color: #333 transparent transparent transparent;
-            }
+        }
+
+        /* Стрелочка tooltip — без CSS nesting для совместимости */
+        .tooltip-text::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #333 transparent transparent transparent;
         }
 
         /* Показываем при наведении */
@@ -140,18 +141,17 @@
     })();
     </script>
 
-    <meta name="theme-color" content="#ffffff" />
 
 <!--    Hero img-->
     <link rel="preload" as="image"
-          imagesrcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
+          imagesrcset="./img/secure-dns-dashboard-example.webp 1x, ./img/secure-dns-dashboard-example@2x.webp 2x"
           imagesizes="100vw"
-          href="/img/secure-dns-dashboard-example.webp">
+          href="./img/secure-dns-dashboard-example.webp">
 
 </head>
 <body class="bg-white text-neutral-900 dark:bg-neutral-950 dark:text-neutral-100">
 <header class="max-w-6xl mx-auto px-4 py-6 flex items-center justify-between">
-  <a href="/" class="text-xl font-semibold">Do-Tek</a>
+  <a href="./" class="text-xl font-semibold">Do-Tek</a>
   <nav class="hidden md:flex gap-6 text-sm">
     <a href="#solutions" class="hover:underline">Решения</a>
     <a href="#business" class="hover:underline">Для бизнеса</a>
@@ -217,15 +217,15 @@
         <picture>
             <source
                     type="image/webp"
-                    srcset="/img/secure-dns-dashboard-example.webp 1x, /img/secure-dns-dashboard-example@2x.webp 2x"
+                    srcset="./img/secure-dns-dashboard-example.webp 1x, ./img/secure-dns-dashboard-example@2x.webp 2x"
                     sizes="100vw">
             <source
                     type="image/jpeg"
-                    srcset="/img/secure-dns-dashboard-example.jpg 1x, /img/secure-dns-dashboard-example@2x.jpg 2x"
+                    srcset="./img/secure-dns-dashboard-example.jpg 1x, ./img/secure-dns-dashboard-example@2x.jpg 2x"
                     sizes="100vw">
 <!--            with real size - width="1280" height="507" -->
             <img
-                    src="/img/secure-dns-dashboard-example.jpg"
+                    src="./img/secure-dns-dashboard-example.jpg"
                     alt="Пример дашборда Do-Tek DNS: QPS, latency, блокировки категорий, DoH/DoT"
                     fetchpriority="high"
                     loading="eager"
@@ -697,14 +697,24 @@
   });
 </script>
 
-<!--PWA-->
-<!-- <script>
-    if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/sw.js')
-            .then(() => console.log('✅ Service Worker зарегистрирован'))
-            .catch(err => console.error('❌ Service Worker ошибка', err));
-    }
-</script> -->
+<!-- PWA отключён. Удаляем ранее зарегистрированный service worker и его кэши. -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', async () => {
+      try {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map(registration => registration.unregister()));
+
+        if ('caches' in window) {
+          const cacheNames = await caches.keys();
+          await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+        }
+      } catch (error) {
+        console.warn('Не удалось удалить старый service worker:', error);
+      }
+    });
+  }
+</script>
 
 </body>
 </html>
